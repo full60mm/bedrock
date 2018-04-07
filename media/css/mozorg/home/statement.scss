@@ -45,7 +45,7 @@
         @include font-size-level4;
         margin: 0 auto;
         margin-top: 30vh;
-        max-width: 35ch;
+        max-width: 36ch;
         padding-top: 10px;
     }
 
@@ -92,7 +92,7 @@
 }
 
 /* with graditiude to http://lea.verou.me/2012/02/simpler-css-typing-animation-with-the-ch-unit/*/
-$width: 35;
+$width: 36;
 $text: #000;
 $bg: #fff;
 $cursor-speed: 30; // characters per second
@@ -100,7 +100,7 @@ $duration: $width / $cursor-speed * 1s;
 $cursor-duration: $duration / $width;
 $cursor-wait-duration: 1s;
 $cursor-wait-iteration: 2;
-$paragraph-lengths: (32, 34);
+$paragraph-lengths: (32, 36);
 
 .type {
     position: relative;
@@ -231,7 +231,7 @@ A varient
         }
 
         .type-p {
-            width: 34ch;
+            width: 36ch;
             animation-delay: $total-delay + 0.1s;
         }
 
