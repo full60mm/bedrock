@@ -4,13 +4,12 @@
 
 (function() {
     'use strict';
-    
+
     // example configuration for a redirect experiment
     var cop = new Mozilla.TrafficCop({
         id: 'experiment-home-statement',
         variations: {
-            'v=1': 50,
-            'v=2': 50
+            'v=a': 50,
         }
     });
 

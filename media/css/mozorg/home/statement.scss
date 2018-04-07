@@ -33,10 +33,6 @@
     .js & {
         display: block;
     }
-
-    .var-a & {
-        display: none;
-    }
 }
 
 #promo-statement {
@@ -48,7 +44,7 @@
     .content-wrapper {
         @include font-size-level4;
         margin: 0 auto;
-        margin-top: 20vh;
+        margin-top: 30vh;
         max-width: 35ch;
         padding-top: 10px;
     }
@@ -65,21 +61,20 @@
         font-family: Monaco, monospace;
         font-weight: normal;
         margin-bottom: 1.25em;
+        color: #000;
+        background-color: #fff;
+        display: inline-block;
     }
 
     a {
         position: relative;
         display: inline-block;
-        color: #00f;
+        color: #000;
         background-color: #fff;
+        text-decoration: none;
 
-        .var-a & {
-            color: #000;
-            text-decoration: none;
-
-            &:hover {
-                filter: invert(100);
-            }
+        span {
+            text-decoration: underline;
         }
     }
 
@@ -93,21 +88,6 @@
         position: absolute;
         top: 20px;
         width: 100px;
-
-        .var-a & {
-            display: none;
-        }
-    }
-}
-
-@keyframes underline {
-    0% {
-        color: #000;
-        text-decoration: none;
-    }
-    1% {
-        color: #00f;
-        text-decoration: underline;
     }
 }
 
@@ -121,44 +101,6 @@ $cursor-duration: $duration / $width;
 $cursor-wait-duration: 1s;
 $cursor-wait-iteration: 2;
 $paragraph-lengths: (32, 34);
-
-@keyframes letters {
-    // animation, go from left to right
-    from {
-        left: 0;
-    }
-    to {
-        left: $width + ch;
-    }
-}
-
-@keyframes lines {
-    // go from top to bottom
-    from {
-        top: 0;
-    }
-    to {
-        top: 100%;
-    }
-}
-
-@keyframes cursor-type {
-    50% {
-        border-color: #000;
-    }
-}
-
-@keyframes cursor-wait {
-    0% {
-        box-shadow: inset 1px 0 0 0 rgba(0, 0, 0, 0);
-    }
-    1% {
-        box-shadow: inset 1px 0 0 0 rgba(0, 0, 0, 1);
-    }
-    40% {
-        box-shadow: inset 1px 0 0 0 rgba(0, 0, 0, 1);
-    }
-}
 
 .type {
     position: relative;
@@ -184,7 +126,7 @@ $paragraph-lengths: (32, 34);
 
         &:before {
             // cursor and first line mask
-            border-left: 1px solid transparent;
+            border-left: 2px solid transparent;
             top: 100%;
             animation-name: letters, lines, cursor-type, cursor-wait;
             animation-fill-mode: both, both, both, backwards;
@@ -200,7 +142,6 @@ $paragraph-lengths: (32, 34);
         }
     }
 }
-
 
 $iterations: 1;
 $total-delay: 0s;
@@ -234,14 +175,123 @@ $total-delay: 0s;
     $iterations: $iterations + 1;
 }
 
-
+// must be after $total-delay is defined
 #promo-statement {
-    a {
+    span {
         animation-name: underline;
         animation-duration: 1s;
         animation-timing-function: step-end;
+        animation-delay: $total-delay - (1 / $cursor-speed);
+        animation-iteration-count: 1;
+        animation-fill-mode: both;
+    }
+}
+
+/*
+A varient
+========================= */
+.var-a {
+    #promo-close,
+    #promo-statement:before
+     {
+        display: none;
+    }
+
+    .type {
+        background-image: linear-gradient(to right, transparent 50%, #000 50%);
+        background-position: 0;
+        background-size: 200%;
+        animation-name: highlight;
+        animation-duration: 0.1s;
+        animation-timing-function: linear;
         animation-delay: $total-delay;
         animation-iteration-count: 1;
-        animation-fill-mode: forwards;
+        animation-fill-mode: both;
+    }
+
+    /* I think this is only okay because there's 2 ch difference */
+    .type-head {
+        width: 32ch;
+    }
+
+    .type-p {
+        width: 34ch;
+        animation-delay: $total-delay + 0.1s;
+    }
+
+    #promo-statement {
+        span {
+            animation: none;
+        }
+    }
+
+}
+
+
+/*
+Animations
+========================= */
+
+@keyframes underline {
+    0% {
+        color: #000;
+        text-decoration: none;
+    }
+    1% {
+        color: #00f;
+        text-decoration: underline;
+    }
+}
+
+@keyframes highlight {
+    0% {
+        background-position: 0;
+        color: #000;
+    }
+    1% {
+        background-position: 0;
+        color: #fff;
+    }
+    100% {
+        background-position: -100%;
+        color: #fff;
+    }
+}
+
+@keyframes letters {
+    // animation, go from left to right
+    from {
+        left: 0;
+    }
+    to {
+        left: $width + ch;
+    }
+}
+
+@keyframes lines {
+    // go from top to bottom
+    from {
+        top: 0;
+    }
+    to {
+        top: 100%;
+    }
+}
+
+@keyframes cursor-type {
+    50% {
+        border-color: #000;
+    }
+}
+
+@keyframes cursor-wait {
+    0% {
+        box-shadow: inset 2px 0 0 0 rgba(0, 0, 0, 0);
+    }
+    1% {
+        box-shadow: inset 2px 0 0 0 rgba(0, 0, 0, 1);
+    }
+    40% {
+        box-shadow: inset 2px 0 0 0 rgba(0, 0, 0, 1);
     }
 }

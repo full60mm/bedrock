@@ -24,7 +24,7 @@
 
         // close with escape key
         $doc.on('keyup.' + evtNamespace, function(e) {
-            if (e.keyCode === 27 && open) {
+            if (e.keyCode === 27) {
                 promoClose();
             }
         });
