@@ -112,33 +112,36 @@ $paragraph-lengths: (32, 34);
 
       // falls back to displaying static text
     @supports (width: 1ch) {
-        &:before,
-        &:after {
-            box-sizing: border-box;
-            content: '';
-            position: absolute;
-            z-index: 1;
-            display: block;
-            height: 1.2em;
-            width: 100%;
-            background-color: $bg;
-        }
+        .lang-en-GB &,
+        .lang-en-US & {
+            &:before,
+            &:after {
+                box-sizing: border-box;
+                content: '';
+                position: absolute;
+                z-index: 1;
+                display: block;
+                height: 1.2em;
+                width: 100%;
+                background-color: $bg;
+            }
 
-        &:before {
-            // cursor and first line mask
-            border-left: 2px solid transparent;
-            top: 100%;
-            animation-name: letters, lines, cursor-type, cursor-wait;
-            animation-fill-mode: both, both, both, backwards;
-        }
+            &:before {
+                // cursor and first line mask
+                border-left: 2px solid transparent;
+                top: 100%;
+                animation-name: letters, lines, cursor-type, cursor-wait;
+                animation-fill-mode: both, both, both, backwards;
+            }
 
-        &:after {
-            // mask for subsequent lines
-            content: '';
-            height: 100%;
-            top: 100%;
-            left: 0;
-            margin-top: 1.2em;
+            &:after {
+                // mask for subsequent lines
+                content: '';
+                height: 100%;
+                top: 100%;
+                left: 0;
+                margin-top: 1.2em;
+            }
         }
     }
 }
@@ -176,14 +179,17 @@ $total-delay: 0s;
 }
 
 // must be after $total-delay is defined
-#promo-statement {
-    span {
-        animation-name: underline;
-        animation-duration: 1s;
-        animation-timing-function: step-end;
-        animation-delay: $total-delay - (1 / $cursor-speed);
-        animation-iteration-count: 1;
-        animation-fill-mode: both;
+.lang-en-GB,
+.lang-en-US {
+    #promo-statement {
+        span {
+            animation-name: underline;
+            animation-duration: 1s;
+            animation-timing-function: step-end;
+            animation-delay: $total-delay - (1 / $cursor-speed);
+            animation-iteration-count: 1;
+            animation-fill-mode: both;
+        }
     }
 }
 
@@ -196,7 +202,10 @@ A varient
      {
         display: none;
     }
+}
 
+.lang-en-GB.var-a,
+.lang-en-US.var-a {
     .type {
         background-image: linear-gradient(to right, transparent 50%, #000 50%);
         background-position: 0;
@@ -224,7 +233,6 @@ A varient
             animation: none;
         }
     }
-
 }
 
 
