@@ -105,42 +105,46 @@ $paragraph-lengths: (32, 34);
 .type {
     position: relative;
     font-family: Consolas, Monaco, monospace; // must be monospace
-    width: $width + ch;
     line-height: 1.2;
-    word-break: break-all; // this has to be a predictable height and width to work
-    overflow: hidden;
+    max-width: 500px;
 
-      // falls back to displaying static text
-    @supports (width: 1ch) {
-        .lang-en-GB &,
-        .lang-en-US & {
-            &:before,
-            &:after {
-                box-sizing: border-box;
-                content: '';
-                position: absolute;
-                z-index: 1;
-                display: block;
-                height: 1.2em;
-                width: 100%;
-                background-color: $bg;
-            }
+    // falls back to displaying static text
+    @media #{$mq-tablet} {
+        max-width: $width + ch;
+        word-break: break-all; // this has to be a predictable height and width to work
+        overflow: hidden;
 
-            &:before {
-                // cursor and first line mask
-                border-left: 2px solid transparent;
-                top: 100%;
-                animation-name: letters, lines, cursor-type, cursor-wait;
-                animation-fill-mode: both, both, both, backwards;
-            }
+        @supports (width: 1ch) {
+            .lang-en-GB &,
+            .lang-en-US & {
+                &:before,
+                &:after {
+                    box-sizing: border-box;
+                    content: '';
+                    position: absolute;
+                    z-index: 1;
+                    display: block;
+                    height: 1.2em;
+                    width: 100%;
+                    background-color: $bg;
+                }
 
-            &:after {
-                // mask for subsequent lines
-                content: '';
-                height: 100%;
-                top: 100%;
-                left: 0;
-                margin-top: 1.2em;
+                &:before {
+                    // cursor and first line mask
+                    border-left: 2px solid transparent;
+                    top: 100%;
+                    animation-name: letters, lines, cursor-type, cursor-wait;
+                    animation-fill-mode: both, both, both, backwards;
+                }
+
+                &:after {
+                    // mask for subsequent lines
+                    content: '';
+                    height: 100%;
+                    top: 100%;
+                    left: 0;
+                    margin-top: 1.2em;
+                }
             }
         }
     }
@@ -179,16 +183,18 @@ $total-delay: 0s;
 }
 
 // must be after $total-delay is defined
-.lang-en-GB,
-.lang-en-US {
-    #promo-statement {
-        span {
-            animation-name: underline;
-            animation-duration: 1s;
-            animation-timing-function: step-end;
-            animation-delay: $total-delay - (1 / $cursor-speed);
-            animation-iteration-count: 1;
-            animation-fill-mode: both;
+@media #{$mq-tablet} {
+    .lang-en-GB,
+    .lang-en-US {
+        #promo-statement {
+            span {
+                animation-name: underline;
+                animation-duration: 1s;
+                animation-timing-function: step-end;
+                animation-delay: $total-delay - (1 / $cursor-speed);
+                animation-iteration-count: 1;
+                animation-fill-mode: both;
+            }
         }
     }
 }
@@ -204,33 +210,35 @@ A varient
     }
 }
 
-.lang-en-GB.var-a,
-.lang-en-US.var-a {
-    .type {
-        background-image: linear-gradient(to right, transparent 50%, #000 50%);
-        background-position: 0;
-        background-size: 200%;
-        animation-name: highlight;
-        animation-duration: 0.1s;
-        animation-timing-function: linear;
-        animation-delay: $total-delay;
-        animation-iteration-count: 1;
-        animation-fill-mode: both;
-    }
+@media #{$mq-tablet} {
+    .lang-en-GB.var-a,
+    .lang-en-US.var-a {
+        .type {
+            background-image: linear-gradient(to right, transparent 50%, #000 50%);
+            background-position: 0;
+            background-size: 200%;
+            animation-name: highlight;
+            animation-duration: 0.1s;
+            animation-timing-function: linear;
+            animation-delay: $total-delay;
+            animation-iteration-count: 1;
+            animation-fill-mode: both;
+        }
 
-    /* I think this is only okay because there's 2 ch difference */
-    .type-head {
-        width: 32ch;
-    }
+        /* I think this is only okay because there's 2 ch difference */
+        .type-head {
+            width: 32ch;
+        }
 
-    .type-p {
-        width: 34ch;
-        animation-delay: $total-delay + 0.1s;
-    }
+        .type-p {
+            width: 34ch;
+            animation-delay: $total-delay + 0.1s;
+        }
 
-    #promo-statement {
-        span {
-            animation: none;
+        #promo-statement {
+            span {
+                animation: none;
+            }
         }
     }
 }
