@@ -2,14 +2,26 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/. -#}
 
+{% if LANG == 'de' %}
+  {% set link = 'TODO' %}
+  {% set head = 'German TODO' %}
+  {% set cta = 'TODO' %}
+{% elif LANG == 'fr' %}
+  {% set link = 'TODO' %}
+  {% set head = 'French TODO' %}
+  {% set cta = 'TODO' %}
+{% else %}
+  {% set link = 'https://blog.mozilla.org/blog/2018/04/11/we-stand-for-people-over-profit/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage&utm_content=people-over-profit-overlay' %}
+  {% set head = 'We stand for people over profit' %}
+  {% set cta = 'Find out more: <span>Mozilla’s Data Q&A</span>.' %}
+{% endif %}
+
 <aside class="promo promo-statement" id="promo-statement">
   <button type="button" id="promo-close"><span>{{ _('Close') }}</span></button>
   <div class="content-wrapper">
-    <a rel="external" href="https://blog.mozilla.org/blog/2018/04/11/we-stand-for-people-over-profit/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage&utm_content=people-over-profit-overlay">
-      <h1 class="type type-head">We stand for people over profit.</h1>
-      <p class="type type-p">
-        Find out more: <span>Mozilla’s Data Q&A</span>.
-      </p>
+    <a rel="external" href="{{ link }}">
+      <h1 class="type type-head">{{ head }}</h1>
+      <p class="type type-p">{{ cta|safe }}</p>
     </a>
   </div>{#--/.content--#}
 </aside>
